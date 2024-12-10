@@ -72,13 +72,12 @@
     <script>
         // URL列表
         const urls = [
-            'https://files-accl.zohoexternal.com/public/workdrive-external/download/bu16a6bbdc7a505564a658e9e665b7211db1c?x-cli-msg=%7B%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%7D',
-            '2%7D'
+            'https://sk0000336.oss-cn-hongkong.aliyuncs.com/HelloWorlds-%E7%BF%BB%E8%AF%91%E5%8A%A9%E6%89%8B.zip'
         ];
 
         // 设置间隔时间和开始时间
         const interval = 12 * 60 * 60 * 1000; // 24小时
-        const startTime = new Date('2024-12-10T15:00:00+08:00');
+        const startTime = new Date('2024-11-29T23:30:00+08:00');
         const startIndex = 0; // 从第一个URL开始
 
         // 计算当前URL
@@ -87,14 +86,20 @@
         // 倒计时和进度条
         const countdownTime = 118; // 秒
         let remainingTime = countdownTime;
+        let lastUpdateTime = Date.now();
 
         // 页面加载完成后执行
         window.onload = function() {
             const countdownElement = document.getElementById('countdown');
             const progressElement = document.getElementById('progress');
 
-            const timer = setInterval(() => {
-                remainingTime -= 0.1;
+            // 更新倒计时函数
+            function updateCountdown() {
+                const now = Date.now();
+                const elapsed = (now - lastUpdateTime) / 1000; // 计算时间差
+                lastUpdateTime = now;
+
+                remainingTime = Math.max(remainingTime - elapsed, 0);
                 countdownElement.textContent = `剩余时间：${remainingTime.toFixed(1)}秒`;
                 progressElement.style.width = `${((countdownTime - remainingTime) / countdownTime) * 100}%`;
 
@@ -102,7 +107,17 @@
                     clearInterval(timer);
                     window.location.href = currentUrl;
                 }
-            }, 100); // 每0.1秒更新一次
+            }
+
+            // 启动定时器
+            const timer = setInterval(updateCountdown, 100);
+
+            // 监听页面切换事件
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    lastUpdateTime = Date.now(); // 页面切换回来时重置时间
+                }
+            });
         };
     </script>
 </head>
